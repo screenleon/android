@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.practice.MainActivity" >
+
+    <EditText android:id="@+id/et_main_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:ems="8"
+        android:hint="Username"
+        android:inputType="text" />
+
+    <EditText android:id="@+id/et_main_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="8"
+        android:hint="Temperature"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/et_main_username" />
+
+    <TextView  android:id="@+id/tv_main_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="20"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/et_main_temperature" />
+
+    <Button android:id="@+id/btn_main_add_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_main_display"
+        android:onClick="addRecord"
+        android:textSize="10dp"
+        android:text="Add Record" />
+
+    <Button android:id="@+id/btn_main_clear_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_main_display"
+        android:layout_marginStart="140dp"
+        android:textSize="10dp"
+        android:onClick="clearRecord"
+        android:text="Clear Records" />
+
+    <Button android:id="@+id/btn_main_display_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_main_display"
+        android:layout_alignParentRight="true"
+        android:text="Display Record"
+        android:textSize="10dp"
+        android:onClick="displayRecord" />
+
+    <TextView android:id="@+id/tv_main_sort_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_main_add_record"
+        android:text="Sort Type:"
+        android:layout_marginTop="10dp" />
+
+    <RadioGroup android:id="@+id/rg_main_sort"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/tv_main_sort_text"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal" >
+
+        <RadioButton android:id="@+id/rb_main_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="None"
+            android:checked="true"
+            android:textSize="15dp"
+            android:layout_weight="1"/>
+
+        <RadioButton android:id="@+id/rb_main_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="15dp"
+            android:checked="false"
+            android:layout_weight="1" />
+
+        <RadioButton android:id="@+id/rb_main_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperature"
+            android:textSize="15dp"
+            android:checked="false"
+            android:layout_weight="1" />
+
+        <RadioButton android:id="@+id/rb_main_datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Datetime"
+            android:textSize="15dp"
+            android:checked="false"
+            android:layout_weight="1" />
+
+    </RadioGroup>
+
+    <Button android:id="@+id/btn_main_send_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Send Email"
+        android:layout_below="@+id/rg_main_sort"
+        android:layout_marginTop="30dp"
+        android:onClick="sendEmail" />
+
+</RelativeLayout>
