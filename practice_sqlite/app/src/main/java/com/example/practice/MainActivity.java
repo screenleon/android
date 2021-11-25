@@ -103,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
         String[] TO = {"lien@kjump.com.tw"};
         String[] CC = {""};
 
-//        Intent selectorIntent = new Intent(Intent.ACTION_SENDTO);
-//        selectorIntent.setData(Uri.parse("mailto:"));
 
         Intent emailIntent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
         ArrayList<Record> records = this.dbHelper.getAllRecords();
@@ -112,9 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         body = "OUcare wishes you the best of health. \n";
 
-//        emailIntent.setType("text/plain");
         emailIntent.setType("text/html");
-//        emailIntent.setType("message/rfc822");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
         emailIntent.putExtra(Intent.EXTRA_CC, CC);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "OUcare Message");
@@ -130,16 +126,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Not found file to attachment", Toast.LENGTH_LONG).show();
         }
 
-//        emailIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(mailText.toString()));
-//        emailIntent.putExtra(Intent.EXTRA_HTML_TEXT, mailText.toString());
-
-//        emailIntent.setSelector(selectorIntent);
         Log.i("Lien email output", body.toString());
 
         try {
             startActivity(emailIntent);
-//            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-//            finish();
             Log.i("Lien email", "Start send email");
         } catch (ActivityNotFoundException ex) {
             Toast.makeText(MainActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
@@ -149,32 +139,21 @@ public class MainActivity extends AppCompatActivity {
     private String recordsOuputFormat(Object[] records) {
         StringBuilder mailText = new StringBuilder();
         StringBuilder gaps = new StringBuilder();
-//        mailText.append("<html><body>");
 
         if (records.length > 0) {
             mailText.append("姓名        溫度    時間\n");
-//            mailText.append("<table><tr><th>名稱</th><th>溫度</th><th>時間</th></tr>");
             for (int index = 0; index < records.length; index++) {
-//                mailText.append("<tr>");
                 Record record =(Record) records[index];
                 Date date = new Date(record.getDatetime() * 1000L);
                 int nameGap = 15 - record.getUsernameSpace();
-//                gaps.append(Integer.toString(15 - nameGap) + "\n");
-//                Log.d("Lien name gap", Integer.toString(15 - nameGap));
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mma");
-//                mailText.append(String.format("<td>%s</td>", record.getUsername()));
-//                mailText.append(String.format("<td>%.2f</td>", record.getTemperature()));
-//                mailText.append(String.format("<td>%s</td>", sdf.format(date)));
                 mailText.append(record.getUsername());
                 for(int gapIndex = 0; gapIndex < nameGap; gapIndex++) mailText.append(" ");
                 mailText.append(String.format("% 4.2f   %s\n", record.getTemperature(), sdf.format(date)));
-//                mailText.append("</tr>");
             }
-//            mailText.append("</table>");
         }
 
         mailText.append("\nOUcare wishes you the best of health. \n");
-//        mailText.append("</body></html>");
 
         mailText.append("\n" + gaps);
 
@@ -195,9 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mma");
                     output.append(String.format("%s,%4.2f,%s\r\n", record.getUsername(), record.getTemperature(), sdf.format(date)));
                 }
-//                Files.write(tempFile, output.toString().getBytes(StandardCharsets.UTF_8));
                 Files.write(tempFile, new String(output.toString().getBytes(StandardCharsets.UTF_8)).getBytes(Charset.forName("big5")));
-//                Log.d("Lien temp file", "Read file: " + Files.readAllLines(tempFile));
                 return tempFile;
             }
         } catch (IOException e) {
